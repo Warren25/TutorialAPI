@@ -1,3 +1,7 @@
+using Microsoft.AspNetCore.Mvc;           // Add this!
+using Microsoft.EntityFrameworkCore;
+using UserCore.Data;                      // Add this!
+
 namespace UserApi.Controllers;
 
 [ApiController]
