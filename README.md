@@ -19,6 +19,7 @@ This project implements a microservices architecture with three main components:
 - Docker & Docker Compose
 - Redis
 - Swagger/OpenAPI
+- **HTTPS/SSL Support** - Development certificates for secure connections
 
 ## Project Structure
 
@@ -40,24 +41,28 @@ This project implements a microservices architecture with three main components:
 
 ### Running the Application
 
-1. **Start the infrastructure services:**
+1. **Generate HTTPS certificates (required for HTTPS support):**
+   ```bash
+   # Install .NET 8 SDK if not already installed
+   dotnet dev-certs https --trust
+   mkdir -p https
+   dotnet dev-certs https -ep https/aspnetapp.pfx -p aspnetapp
+   ```
+
+2. **Start the infrastructure services:**
    ```bash
    docker compose up -d
    ```
 
-2. **Run database migrations:**
+3. **Run database migrations:**
    ```bash
    dotnet ef database update --project src/UserCore --startup-project src/UserApi
    ```
 
-3. **Start the API:**
-   ```bash
-   dotnet run --project src/UserApi
-   ```
-
 4. **Access the API:**
-   - API Base URL: `http://localhost:5195`
-   - Swagger UI: `http://localhost:5195/swagger`
+   - **HTTP**: `http://localhost:5195`
+   - **HTTPS**: `https://localhost:7251`
+   - **Swagger UI**: `http://localhost:5195/swagger` or `https://localhost:7251/swagger`
 
 ## API Endpoints
 

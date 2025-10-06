@@ -29,7 +29,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+// app.UseHttpsRedirection(); // Commented out to allow both HTTP and HTTPS
+
+// Add health check endpoint
+app.MapGet("/health", () => "Healthy");
 
 // Map controllers instead of individual endpoints
 app.MapControllers();
