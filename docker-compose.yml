@@ -35,13 +35,13 @@ services:
       dockerfile: src/UserApi/Dockerfile
     ports:
       - "5195:8080"  # HTTP port
-      - "7251:8081"  # HTTPS port
+      - "7251:8081"  # HTTPS port (only used if ENABLE_HTTPS=true)
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=http://+:8080;https://+:8081
+      - ASPNETCORE_URLS=${ASPNETCORE_URLS:-http://+:8080}
       - ConnectionStrings__DefaultConnection=Host=postgres;Port=5432;Database=UserMicroservices;Username=postgres;Password=postgres
-      - ASPNETCORE_Kestrel__Certificates__Default__Password=aspnetapp
-      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=${CERT_PASSWORD:-}
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=${CERT_PATH:-}
     volumes:
       - ./https:/https:ro  # Mount the certificate directory as read-only
     depends_on:

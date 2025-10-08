@@ -3,10 +3,8 @@ WORKDIR /app
 EXPOSE 8080
 EXPOSE 8081
 
-# Configure HTTPS
-ENV ASPNETCORE_URLS=http://+:8080;https://+:8081
-ENV ASPNETCORE_Kestrel__Certificates__Default__Password=aspnetapp
-ENV ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
+# Configure URLs - can be overridden by docker-compose or environment
+ENV ASPNETCORE_URLS=http://+:8080
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release

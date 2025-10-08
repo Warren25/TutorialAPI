@@ -41,15 +41,26 @@ This project implements a microservices architecture with three main components:
 
 ### Running the Application
 
-1. **Generate HTTPS certificates (required for HTTPS support):**
+1. **Set up environment variables:**
    ```bash
-   # Install .NET 8 SDK if not already installed
-   dotnet dev-certs https --trust
-   mkdir -p https
-   dotnet dev-certs https -ep https/aspnetapp.pfx -p aspnetapp
+   # Copy the example environment file
+   cp .env.example .env
+   
+   # Edit .env and set your values (especially CERT_PASSWORD)
+   # The default password is: aspnetapp
    ```
 
-2. **Start the infrastructure services:**
+2. **Generate HTTPS certificates (required for HTTPS support):**
+   ```bash
+   # Create https directory
+   mkdir -p https
+   
+   # Generate development certificate (use the same password as in .env)
+   dotnet dev-certs https -ep https/aspnetapp.pfx -p aspnetapp
+   dotnet dev-certs https --trust
+   ```
+
+3. **Start the infrastructure services:**
    ```bash
    docker compose up -d
    ```

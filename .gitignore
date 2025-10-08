@@ -377,3 +377,9 @@ Thumbs.db
 
 # SSL certificates - don't commit to source control
 https/
+
+# Environment variables - contains sensitive data
+.env
+.env.local
+.env.development
+.env.production
